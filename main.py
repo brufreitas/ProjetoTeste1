@@ -9,7 +9,7 @@ screenHeight = 600
 rectWidth = 50
 rectHeight = 50
 rectCount = 0
-heroSpeed = 100 # pixels per sec
+heroSpeed = 100        # pixels per sec
 fps = 60
 drawDelay = round(1000 / fps)
 
