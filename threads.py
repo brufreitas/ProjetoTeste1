@@ -13,9 +13,16 @@ class myThread (threading.Thread):
 
 
     def run(self):
-        print ("Starting " + self.name + '\n')
+        threadLock.acquire()
+        print ("Starting " + self.name)
+        threadLock.release()
+
         print_time(self.name, self.sleep, 9)
-        print ("Exiting " + self.name + '\n')
+
+        threadLock.acquire()
+        threads.remove(self.name)
+        print ("Exiting " + self.name)
+        threadLock.release()
 
 
 def print_time(threadName, delay, counter):
@@ -44,10 +51,11 @@ for tName in threadList:
     threads.append(thread)
     threadID += 1
 
+print (threads)
 
 # Wait for all threads to complete
 while len(threads) > 0:
-    t.join(3)
-    print ("----------> Ainda tem ativas: " + str(threading.active_count()))
+    time.sleep(1)
+    print ("----------> Ainda tem ativas: " + str(threading.active_count()) + '/' + str(len(threads)))
 
 print ("Exiting Main Thread")
